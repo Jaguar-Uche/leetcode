@@ -1,4 +1,3 @@
-jul = [8,9,1,2,3]
-jul.sort(reverse=True)
-jul[9] = 5
-print(jul)
+jul = ["IX","C","M"]
+roman_num = {"I":1, "V" :5,"X" : 10,"L" : 50, "C" : 100,"D": 500,"M":1000}
+print(roman_num["V"])
