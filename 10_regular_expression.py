@@ -4,21 +4,16 @@ def isMatch(s, p):
     indices_of_asteriks = []
     indices_of_first = []
     patterns = []
+    special_patterns = []
     for i in range(len(p)):
         if p[i] == '.':
             if len(p) - i >= len(s):
                 patterns.append(p[i::])
             indices_of_dot.append(i)
-        elif p[i] == '*':
-            if len(p) - i >= len(s):
-                patterns.append(p[i::])
-            indices_of_asteriks.append(i)
         elif p[i] == s[0]:
             if len(p) - i >= len(s):
                 patterns.append(p[i::])
             indices_of_first.append(i)
-
-
-
-
+        if s in patterns:
+            return True
 print(isMatch("ab", ".*"))
