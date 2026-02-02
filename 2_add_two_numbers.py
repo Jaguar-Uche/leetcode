@@ -50,23 +50,3 @@ def addTwoNumbers(l1, l2):
 
     return construct_linked_list(value_list)
 
-
-head = ListNode(9)
-head.next = ListNode(9)
-head.next.next = ListNode(9)
-head.next.next.next = ListNode(9)
-head.next.next.next.next = ListNode(9)
-head.next.next.next.next.next = ListNode(9)
-head.next.next.next.next.next.next = ListNode(9)
-
-
-bottom = ListNode(9)
-bottom.next = ListNode(9)
-bottom.next.next = ListNode(9)
-bottom.next.next.next = ListNode(9)
-
-# head = construct_linked_list([2,4,3])
-# bottom = construct_linked_list([5,6,4])
-
-list = addTwoNumbers(head, bottom)
-print_linked_list(list)
