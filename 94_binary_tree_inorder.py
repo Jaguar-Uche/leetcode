@@ -1,3 +1,4 @@
+from typing import Optional, List
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
         self.val = val
@@ -23,5 +24,5 @@ class Solution:
                 pass
             else:
                 print("Right is not empty")
-                res2.extend(res2)
+                result.extend(res2)
             return result
