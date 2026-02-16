@@ -11,7 +11,8 @@ class Solution:
             while j <= i:
                 if arr_of_glasses[i][j] > 1:
                     diff = arr_of_glasses[i][j] -1
-                    arr_of_glasses[i][j] = 1
+                    if is_row:
+                        arr_of_glasses[i][j] = 1
                     if i + 1 <= query_row:
                         arr_of_glasses[i + 1][j] += diff/ 2
                         arr_of_glasses[i + 1][j + 1] += diff/ 2
@@ -19,7 +20,6 @@ class Solution:
                     if j == query_glass:
                         return arr_of_glasses[i][j]
                 j +=1
-
 
 s = Solution()
 print(s.champagneTower(100000009,33,17))
