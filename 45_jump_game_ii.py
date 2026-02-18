@@ -5,16 +5,12 @@ class Solution:
         arr = [None] * n
         arr[0] = 0
         for i in range(n):
-            print("This is the first arr")
-            print(arr)
-            print("operations started")
             if arr[i] is not None:
                 for j in range(1, nums[i] + 1):
                     if i + j < n:
                         if arr[i+j] is None:
                             arr[i+j] = arr[i] + 1
                     print(arr)
-
                     if arr[n - 1] is not None:
                         return arr[n-1]
 
