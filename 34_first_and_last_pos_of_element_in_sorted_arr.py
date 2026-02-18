@@ -50,6 +50,7 @@ class Solution:
 solution = Solution()
 print(solution.searchRange(nums=[5, 7, 7, 8, 8, 8, 9], target=7))
 
+# Functions that helped
 def binary_search(nums: List[int], target: int) -> int:
     left, right = 0, len(nums) - 1
     while left <= right:
