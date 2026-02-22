@@ -47,5 +47,3 @@ class Stn:
                 uid += 1
 
         return dummy.next
-
-sol
