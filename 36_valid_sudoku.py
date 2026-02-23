@@ -1,9 +1,9 @@
 from typing import List
 class Solution:
     def isValidSudoku(self, board: List[List[str]]) -> bool:
-        columns =[set() for _ in range(9)]
-        rows = [set() for _ in range(9)]
-        squares = [set() for _ in range(9)]
+        columns =[set(), set(), set(), set(), set(), set(), set(), set(), set()]
+        rows = [set(), set(), set(), set(), set(), set(), set(), set(), set()]
+        squares = [set(), set(), set(), set(), set(), set(), set(), set(), set()]
         for i in range(9):
             for j,letter in enumerate(board[i]):
                 if letter != ".":
@@ -26,8 +26,3 @@ print(solution.isValidSudoku([["8","3",".",".","7",".",".",".","."]
 ,[".",".",".","4","1","9",".",".","5"]
 ,[".",".",".",".","8",".",".","7","9"]]))
 
-s ={"1", "3"}
-if "3" in s:
-    print("Yes")
-k = [set() for _ in range(9)]
-print(k)
