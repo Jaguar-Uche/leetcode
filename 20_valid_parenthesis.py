@@ -60,3 +60,31 @@ def isValid(self, s: str) -> bool:
         return False
     else:
         return True
+
+class Soln:
+    def longestValidParenthesis(self, s: str) -> int:
+        if len(s) % 2 != 0:
+            return False
+        stck = []
+        for i, char in enumerate(s):
+            if char == '(' or char == '[' or char == '{':
+                stck.append(char)
+            else:
+                if len(stck)>0:
+                    fir = stck.pop()
+                    if char == ')' and fir == '(':
+                        pass
+                    elif char == ']' and fir == '[':
+                        pass
+                    elif char == '}' and fir == '{':
+                        pass
+                    else:
+                        return False
+                else:
+                    return False
+        if len(stck) != 0:
+            return False
+        return True
+
+solve = Soln()
+print(solve.longestValidParenthesis("([])"))
