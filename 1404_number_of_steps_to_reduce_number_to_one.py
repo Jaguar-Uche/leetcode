@@ -13,8 +13,14 @@ class Solution:
 
 class Soln:
     def numSteps(self, s: str) -> int:
-        carry = 0
-        for i in range(len(s)-1, -1, -1 ):
-            pass
+        steps = carry = 0
+        for i in reversed(range(1, len(s))):
+            val = int(s[i]) + carry
+            if val % 2 == 0:
+                steps += 1
+            else:
+                steps += 2
+                carry = 1
+        return steps + carry
 solution = Soln()
 print(solution.numSteps('11'))
