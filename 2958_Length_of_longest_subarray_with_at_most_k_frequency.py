@@ -47,5 +47,54 @@ class Solution:
         print(f"Check_map is {check_map}")
         global_total = max(global_total, check_map['total'])
         return global_total
+
+
 solution = Solution()
 print(solution.maxSubarrayLength([1,2,2,1,3], 1))
+
+class Sol:
+    def maxSubarrayLength(self, nums: List[int], k: int) -> int:
+        left, right, n = 0, 0, len(nums)
+        global_total = 0
+        check_map = {'total': 0}
+        while right < n:
+            print(f"right: {right} is less than n: {n}")
+            # Add the new element to the window
+            check_map[nums[right]] = check_map.get(nums[right], 0) + 1
+            check_map['total'] += 1
+
+            print(f"check_map: {check_map}")
+
+            # The new element has made the window invalid
+            if check_map[nums[right]] > k:
+                print(f"The frequency of {nums[right]} is greater than k: {k}")
+
+                focus = nums[right]
+                print(f"focus is {focus}")
+
+                seen = 0
+
+                # Keep moving left until focus is valid again
+                while check_map[focus] > k:
+                    print(f"Current value of left is {left}")
+                    if nums[left] == focus:
+                        seen += 1
+                        check_map[focus] -= 1
+                        left += 1
+                        print(f"Left has changed to {left}")
+                    else:
+                        check_map[nums[left]] -= 1
+                        seen += 1
+                        left += 1
+
+                # We removed 'seen' elements from the window
+                check_map['total'] -= seen
+                print(f"Removed {seen} elements")
+                print(f"check_map after shrinking: {check_map}")
+            # At this point the window is guaranteed to be valid
+            global_total = max(global_total, check_map['total'])
+            print(f"global_total: {global_total}")
+            right += 1
+            print()
+
+        return global_total
