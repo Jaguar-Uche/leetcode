@@ -25,5 +25,21 @@ class Solution:
             # print(arrs)
         return no
 
+class Sol:
+    def distinctSubseqII(self, s: str) -> int:
+        end = [0] * 26
+        total = 0
+        for i in range(len(s)):
+            val = ord(s[i]) - ord('a')
+            seen = end[val]
+            new = 1 + total
+            total += (new - seen)
+            total %=1000000007
+            end[val] = new
+        return total
 sol = Solution()
-print(sol.distinctSubseqII("aba"))
+# print(sol.distinctSubseqII("aba"))
+sol2 = Sol()
+print(sol2.distinctSubseqII("aaa"))
+
+# print(ord('b') - ord('a'))
