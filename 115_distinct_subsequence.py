@@ -24,7 +24,6 @@ class Solution:
             for i in range(len(t) - 1, -1, -1):
                 if char == t[i]:
                     dp[i + 1] += dp[i]
-
         return dp[len(t)]
 
 sol = Solution()
