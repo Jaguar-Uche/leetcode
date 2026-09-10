@@ -13,25 +13,26 @@ class Solution:
     def averageOfSubtree(self, root: TreeNode) -> int:
         total_average = 0
         def cyclops(node):
-            nonlocal total_average
-            # total, number of elements
-            a, b = None, None
-            c, d = None, None
-            if node.left is not None:
-                c, d = cyclops(node.left)
-            else:
-                c, d = 0, 0
-            if node.right is not None:
-                a, b = cyclops(node.right)
-            else:
-                a, b = 0, 0
-            total_elements = a + c + 1
-            total_no = d + b + node.val
-            if total_no // total_elements == node.val:
-                total_average += 1
-            return total_elements, total_no
+            nonlocal total_average  # Allows modifying the outer variable
 
-        a, b = cyclops(root)
+            if not node:
+                return 0, 0  # Return (sum_of_values, count_of_nodes)
+
+            # Recursively get the sum and count from left and right subtrees
+            left_sum, left_count = cyclops(node.left)
+            right_sum, right_count = cyclops(node.right)
+
+            # Calculate totals for the current subtree
+            current_sum = left_sum + right_sum + node.val
+            current_count = left_count + right_count + 1
+
+            # Check if the average matches the node's value
+            if current_sum // current_count == node.val:
+                total_average += 1
+
+            return current_sum, current_count
+
+        cyclops(root)
         return total_average
 
 a = TreeNode(4)
