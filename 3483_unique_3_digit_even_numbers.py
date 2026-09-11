@@ -1,29 +1,39 @@
 from typing import List
 class Solution:
     def totalNumbers(self, digits: List[int]) -> int:
-        unique = set()
-        even_and_zero=[]
-        n = len(digits)
-        for i in range(n):
-            if digits[i] % 2 == 0:
-                even_and_zero.append(i)
-        for j in even_and_zero:
-            prod = 1
-            val = digits[j]
-            for i in range(n):
-                digit = digits[i]
-                digit *=10
-                digit += val
-                if i != j:
-                    for k in range(n):
-                        if k != j  and k != i:
-                            num = digits[k]
-                            num *= 100
-                            num += digit
-                            if num >= 100:
-                                unique.add(num)
-        print(unique)
-        return len(unique)
+        freq = [0] * 10
+
+        for d in digits:
+            freq[d] += 1
+
+        ans = 0
+
+        # Choose the units digit
+        for units in range(0, 10, 2):
+            if freq[units] == 0:
+                continue
+
+            # Use one occurrence of units
+            freq[units] -= 1
+
+            # Choose the hundreds digit
+            for hundreds in range(1, 10):
+                if freq[hundreds] == 0:
+                    continue
+
+                freq[hundreds] -= 1
+
+                # Choose the tens digit
+                for tens in range(10):
+                    if freq[tens] > 0:
+                        ans += 1
+
+                freq[hundreds] += 1
+
+            # Put units digit back
+            freq[units] += 1
+
+        return ans
 
 sol = Solution()
 print(sol.totalNumbers([0,2,2]))
