@@ -58,3 +58,59 @@
 # A function that passes information upwards, and then returns a value at end
 
 
+import bisect
+
+
+class Interval:
+    def __init__(self, start, finish, weight):
+        self.start = start
+        self.finish = finish
+        self.weight = weight
+
+    def __repr__(self):
+        return f"({self.start}, {self.finish}, w={self.weight})"
+
+
+def weighted_interval_scheduling(intervals):
+    # Step 1: Sort intervals by finish times
+    intervals.sort(key=lambda x: x.finish)
+    n = len(intervals)
+
+    # Step 2: Extract finish times to easily binary search over them
+    finish_times = [job.finish for job in intervals]
+
+    # M[i] stores the optimal value using the first i intervals
+    M = [0] * (n + 1)
+
+    # Step 3: Fill dynamic programming table
+    for i in range(1, n + 1):
+        current_job = intervals[i - 1]
+
+        # Binary search to find the latest non-overlapping interval.
+        # We look for a finish time <= current_job.start.
+        # bisect_right finds the insertion point, moving 1 index ahead.
+        idx = bisect.bisect_right(finish_times, current_job.start)
+
+        # Calculate options
+        include_val = current_job.weight + M[idx]
+        exclude_val = M[i - 1]
+
+        M[i] = max(include_val, exclude_val)
+    return M[n]
+
+
+# --- Demonstration ---
+# if __name__ == "__main__":
+jobs = [
+        Interval(5,8,1),
+        Interval(6,7,7),
+        Interval(4,7,3),
+        Interval(9,10,6),
+        Interval(7,8,2),
+        Interval(11,14,3),
+        Interval(3,5,5)
+    ]
+# [(1,3,2),(4,5,2),(1,5,5),(6,9,3),(6,7,1),(8,9,1)]
+
+max_profit = weighted_interval_scheduling(jobs)
+print(f"Maximum Profit: {max_profit}")
