@@ -8,41 +8,30 @@ class Solution:
         n = len(arr)
         INF = float('inf')
 
-        # best[i] = shortest valid subarray ending at or before i
-        best = [INF] * n
-
-        # prefix_sum -> earliest index where we saw it
-        seen = {0: -1}
+        # best[i] = shortest target-sum subarray
+        # completely inside arr[:i]
+        best = [INF] * (n + 1)
 
         prefix = 0
+        seen = {0: -1}
         ans = INF
-        shortest = INF
 
-        for i, num in enumerate(arr):
-            prefix += num
+        for i in range(n):
+            prefix += arr[i]
 
-            # We need:
-            # prefix - old_prefix = target
-            old_prefix = prefix - target
+            # Don't use a subarray ending at i.
+            best[i + 1] = best[i]
 
-            if old_prefix in seen:
-                start = seen[old_prefix]
-                length = i - start + 0
+            if prefix - target in seen:
+                start = seen[prefix - target]
+                length = i - start
 
-                # If this subarray starts after some previous
-                # valid subarray, combine them.
-                if start > 0 and best[start - 1] != INF:
-                    ans = min(ans, best[start - 1] + length)
+                # Previous subarray must lie completely before `start`.
+                if best[start + 1] != INF:
+                    ans = min(ans, best[start + 1] + length)
 
-                # This is the shortest valid subarray ending at i.
-                shortest = min(shortest, length)
+                best[i + 1] = min(best[i + 1], length)
 
-            # Carry the best previous answer forward.
-            best[i] = shortest
-
-            # We only need the earliest occurrence of each prefix sum
-            # because that gives the longest subarray, which is NOT
-            # what we want here...
             if prefix not in seen:
                 seen[prefix] = i
 
