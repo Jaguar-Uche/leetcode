@@ -1,5 +1,3 @@
-# convert everything to a list, then get the reverse opening indices and the closing indices
-# then use the opening and
 class Solution:
     def reverseParentheses(self, s: str) -> str:
         s_arr = list(s)
