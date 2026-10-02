@@ -3,7 +3,6 @@ class Solution:
     def generateParenthesis(self, n: int) -> List[str]:
         arr = [""]
         i = 1
-
         while i <= n:
             curr_arr = arr.copy()
             arr = []
@@ -15,9 +14,6 @@ class Solution:
                     if check not in seen:
                         seen.add(check)
                         arr.append(check)
-
-            print(arr)
-            print(f"it has length of {len(arr)}")
             i += 1
         return arr
 
