@@ -147,4 +147,9 @@
 # print(all_palindromes("ababa"))
 
 def backtracking(s):
-    
+    for i, c in enumerate(s):
+        print(c, end=' ')
+        print(i)
+
+
+backtracking("nkechi")
