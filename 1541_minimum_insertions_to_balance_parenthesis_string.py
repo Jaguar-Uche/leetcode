@@ -1,55 +1,25 @@
 class Solution:
     def minInsertions(self, s: str) -> int:
-        opening = []
-        seen = 0
         result = 0
-        for index, char in enumerate(s):
+        need = 0
+
+        for char in s:
             if char == '(':
-                if seen == 0:
-                    opening.append(index)
-                    continue
-                elif seen == 1:
-                    if len(opening) > 0:
-                        opening.pop()
-                        result += 1
-                    else:
-                        result += 2
-                elif seen == 2:
+                need += 2
+
+                if need % 2 == 1:
                     result += 1
-                else:
-                    if seen % 2 == 0:
-                        result += (seen // 2)
-                    else:
-                        result += (seen // 2 + 2)
-                seen = 0
-                opening.append(index)
+                    need -= 1
+
             else:
-                if seen == 1:
-                    if len(opening) > 0:
-                        opening.pop()
-                        seen = 0
-                    else:
-                        seen += 1
-                else:
-                    seen += 1
-        if seen == 0:
-            pass
-        elif seen == 1:
-            if len(opening) > 0:
-                opening.pop()
-                result += 1
-            else:
-                result += 2
-        elif seen == 2:
-            result += 1
-        else:
-            if seen % 2 == 0:
-                result += (seen // 2)
-            else:
-                result += (seen // 2 + 2)
-        result += (2 * len(opening))
-        return result
+                need -= 1
+
+                if need == -1:
+                    result += 1
+                    need = 1
+
+        return result + need
 
 
 sol = Solution()
-print(sol.minInsertions("(()))"))
+print(sol.minInsertions("))))))((()))(()(()))"))
