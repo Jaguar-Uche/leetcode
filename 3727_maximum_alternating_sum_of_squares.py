@@ -1,19 +1,14 @@
 from typing import List
 class Solution:
     def maxAlternatingSum(self, nums: List[int]) -> int:
-        result = 0
-        squares = [x ** 2 for x in nums]
-        squares.sort(reverse=True)
-        left, right = 0, len(squares)-1
-        while left <= right:
-            if left == right:
-                result += squares[left]
-            result += squares[left]
-            left += 1
-            result -= squares[right]
-            right -= 1
+        squares = [ x ** 2 for x in nums]
+        squares.sort()
+        n = len(squares)
+        num_negative = (n)//2
+        negative_sum = sum(squares[:num_negative])
+        positive_sum = sum(squares[num_negative:])
 
-        return result
+        return positive_sum - negative_sum
 
 soln = Solution()
 print(soln.maxAlternatingSum([1,2,3]))
