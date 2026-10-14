@@ -1,3 +1,4 @@
+from functools import lru_cache
 # # import time
 # # def fib(n):
 # #     if n <= 2:
@@ -153,4 +154,68 @@
 #
 #
 # backtracking("nkechi")
-print(3//2)
+print("0"*0)
+
+def numbers_with_sum(n, s):
+    if n <= 0 or s < 1 or s > 9 * n:
+        return []
+
+    @lru_cache(maxsize=None)
+    def possible(pos, remaining):
+        # Can the remaining digits produce this sum?
+        digits_left = n - pos
+
+        if remaining < (1 if pos == 0 else 0):
+            return False
+
+        if remaining > 9 * digits_left:
+            return False
+
+        if pos == n:
+            return remaining == 0
+
+        start = 1 if pos == 0 else 0
+
+        for digit in range(start, 10):
+            if digit > remaining:
+                break
+
+            if possible(pos + 1, remaining - digit):
+                return True
+
+        return False
+
+    result = []
+
+    def backtrack(pos, remaining, path):
+        if pos == n:
+            result.append(path)
+            return
+
+        start = 1 if pos == 0 else 0
+
+        for digit in range(start, 10):
+            if digit > remaining:
+                break
+
+            next_remaining = remaining - digit
+
+            # Skip branches that cannot produce a solution.
+            if not possible(pos + 1, next_remaining):
+                continue
+
+            backtrack(pos + 1, next_remaining, path + str(digit))
+
+    backtrack(0, s, "")
+    return result
+
+
+print(numbers_with_sum(2, 3))
+# [12, 21, 30]
+
+print(numbers_with_sum(3, 6))
+# [105, 114, 123, 132, 141, 150, 204, 213, ...]
+
+print(numbers_with_sum(1, 10))
+
+print("1"+"0" * 4)
