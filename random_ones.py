@@ -220,15 +220,23 @@
 #
 # print("1"+"0" * 4)
 
-def subarray(nums):
-    res = []
-    for i in range(len(nums)):
-        for j in range(i+1):
-            min = []
-            min.extend(nums[j:i+1])
-            res.append(min)
-    print(res)
+# def subarray(nums):
+#     res = []
+#     for i in range(len(nums)):
+#         for j in range(i+1):
+#             min = []
+#             min.extend(nums[j:i+1])
+#             res.append(min)
+#     print(res)
+#
+# subarray([1,2,3])
 
-subarray([1,2,3])
+def divide(nums, length):
+    # divide the array into groups of 3
+    n = len(nums)
+    for i in range(0, n, length):
+        print(nums[i : i + length])
 
 
+divide([1,2,3,4,5,6,7,8,9,10,11], 3)
+a = [1,2,3,4,5,6,7,8,9,10,11]
