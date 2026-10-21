@@ -231,12 +231,27 @@
 #
 # subarray([1,2,3])
 
-def divide(nums, length):
-    # divide the array into groups of 3
-    n = len(nums)
-    for i in range(0, n, length):
-        print(nums[i : i + length])
+# def divide(nums, length):
+#     # divide the array into groups of 3
+#     n = len(nums)
+#     for i in range(0, n, length):
+#         print(nums[i : i + length])
+#
+#
+# divide([1,2,3,4,5,6,7,8,9,10,11], 3)
+# a = [1,2,3,4,5,6,7,8,9,10,11]
 
+# s = "abc"
+# if s == "".join(sorted(s)):
+#     print("It is sorted")
+# else:
+#     print()
+#     print("It is not sorted")
 
-divide([1,2,3,4,5,6,7,8,9,10,11], 3)
-a = [1,2,3,4,5,6,7,8,9,10,11]
+print(ord("z"))
+a = {1}
+
+if a == {1}:
+    print("yes")
+else:
+    print("no")
