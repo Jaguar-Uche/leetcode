@@ -248,10 +248,10 @@
 #     print()
 #     print("It is not sorted")
 
-print(ord("z"))
-a = {1}
-
-if a == {1}:
-    print("yes")
-else:
-    print("no")
+# print(ord("z"))
+# a = {1}
+#
+# if a == {1}:
+#     print("yes")
+# else:
+#     print("no")
